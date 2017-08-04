@@ -26,7 +26,6 @@ public class Main {
         char ans = 'a';
         try{
             do {
-
                 System.out.println("Enter 1-st number: ");
                 float a = input.nextFloat();
                 System.out.println("Choose action (+,-,*,/): ");

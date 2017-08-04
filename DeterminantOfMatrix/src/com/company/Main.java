@@ -3,6 +3,7 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+        //mat2 = 2x2
         int[][] mat2 = {{1,2}, {3,4}};
         int det = (mat2[0][0] * mat2[1][1]) - (mat2[0][1] * mat2[1][1]);
         System.out.println(det);

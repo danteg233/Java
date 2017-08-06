@@ -7,19 +7,17 @@ public class Main {
 
     static Scanner input = new Scanner(System.in).useDelimiter("\n");
 
-    public static float Add(float a, float b){
+    public static double Add(double a, double b){
         return a+b;
     }
-
-    public static float Min(float a, float b){
+    public static double Min(double a, double b){
         return a-b;
     }
-
-    public static  float Mul(float a, float b){
+    public static  double Mul(double a, double b){
         return a*b;
     }
-    public static float Dev(float a, float b){
-        return (b==0) ? 0 : a/b;
+    public static double Dev(double a, double b){
+        return (b==0) ? 0.0 : a/b;
     }
 
     public static void main(String[] args) {
@@ -27,11 +25,12 @@ public class Main {
         try{
             do {
                 System.out.println("Enter 1-st number: ");
-                float a = input.nextFloat();
+
+                double a = input.nextDouble();
                 System.out.println("Choose action (+,-,*,/): ");
                 char c = input.next(".").charAt(0);
                 System.out.println("Enter 2-nd number: ");
-                float b = input.nextFloat();
+                double b = input.nextDouble();
                 switch (c){
                     case '+': System.out.println(a + " + " + b + " = " + Add(a, b)); break;
                     case '-': System.out.println(a + " - " + b + " = " + Min(a, b)); break;
@@ -39,7 +38,6 @@ public class Main {
                     case '/': System.out.println(a + " / " + b + " = " + Dev(a, b)); break;
                     default: System.out.println("Wrong sign!!!"); break;
                 }
-
                 System.out.println("Continue?(y/n)");
                 Scanner scanner = new Scanner(System.in);
                 ans = scanner.next(".").charAt(0);

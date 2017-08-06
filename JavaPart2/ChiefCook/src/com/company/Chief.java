@@ -1,6 +1,8 @@
 package com.company;
 
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,18 +16,29 @@ public class Chief {
         double weight;
 
         System.out.println("Enter ingredient name: ");
-        ingredientName = scanner.nextLine();
+        ingredientName = scanner.next();
         System.out.println("Enter weight: ");
         weight = scanner.nextDouble();
         try{
-            ingredientName = "com.comany.Vegetable." + ingredientName;
+            ingredientName = "com.company." + ingredientName;
             Class ingredientClass = Class.forName(ingredientName);
-            
-
-
+            Class [] paramType = new Class[] {double.class};
+            Constructor constructor = ingredientClass.getDeclaredConstructor(paramType);
+            Vegetable vegetable = (Vegetable) constructor.newInstance(new Object[]{new Double(weight)});
+            System.out.println("DOne");
+            return vegetable;
 
         }catch (ClassNotFoundException e) {
+            e.getStackTrace();
             return null;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
         return null;
     }

@@ -1,6 +1,10 @@
 package com.company;
 
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,7 +14,7 @@ public class Chief {
     private Salad salad = new Salad();
     private Vegetable vegetable = null;
 
-    public Vegetable getIngredient(Scanner scanner) {
+    public Vegetable getIngredient(Scanner scanner) {               //Creating an ingredient for salad
         String ingredientName;
         double weight;
         double calories;
@@ -29,10 +33,11 @@ public class Chief {
 
         try{
             ingredientName = "com.company." + ingredientName;
-            Class ingredientClass = Class.forName(ingredientName);
-            Constructor constructor = ingredientClass.getConstructor(new Class[]{double.class, double.class});
+            Class <?> ingredientClass = Class.forName(ingredientName);
+            Constructor <?> constructor = ingredientClass.getConstructor(new Class[]{double.class, double.class});
             vegetable = (Vegetable) constructor.newInstance(calories, weight);
-            return vegetable;
+            return vegetable;                                                       //If ingredient exist then we return it,
+                                                                                    //otherwise null
 
         }catch (Exception e) {
             System.out.println("Error");
@@ -54,6 +59,9 @@ public class Chief {
             System.out.println("5 - Sort by name");
             System.out.println("6 - Sort by calories");
             System.out.println("7 - Show by range of calories");
+            System.out.println("8 - Search ingredient by name");
+            System.out.println("------------------------------");
+            System.out.println("9 - Write into file");
             System.out.println("0 - Exit");
             Scanner scanner = new Scanner(System.in);
             try {
@@ -108,6 +116,30 @@ public class Chief {
                         System.out.println("Wrong input!");
                         scanner.next();
                         break;
+                    }catch (NegativeException e){                   //Here we catch NegativeException
+                        System.out.println(e.getMessage());
+                        break;
+                    }
+                case 8:
+                    System.out.println("Enter name of needed ingredient: ");    //Here we catch SearchByNameException
+                    String neededIngredient = scanner.next();
+                    try{
+                        salad.searchByName(neededIngredient);
+                        break;
+                    }catch (SearchByNameException e){
+                        System.out.println(e.getMessage());
+                        break;
+                    }
+                case 9:
+                    try {
+                        FileOutputStream fos = new FileOutputStream("D:\\GitProj\\Java\\JavaPart2\\ChiefCook\\check.txt");
+                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                        oos.writeObject(salad);
+                        break;
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
 
 
@@ -116,7 +148,7 @@ public class Chief {
                     break;
 
                 default:
-                    System.out.println("Wrong input, try again!"); break;
+                    System.out.println("Wrong input, try again..."); break;
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.company;
 
-public class Vegetable {
+import java.io.Serializable;
+
+public class Vegetable implements Serializable {
 
     String name;
     double calories;

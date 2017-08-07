@@ -1,10 +1,7 @@
 package com.company;
 
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,6 +10,7 @@ public class Chief {
 
     private Salad salad = new Salad();
     private Vegetable vegetable = null;
+    private String file = "D:\\GitProjects\\Java\\JavaPart2\\ChiefCook\\test.ser";
 
     public Vegetable getIngredient(Scanner scanner) {               //Creating an ingredient for salad
         String ingredientName;
@@ -62,6 +60,8 @@ public class Chief {
             System.out.println("8 - Search ingredient by name");
             System.out.println("------------------------------");
             System.out.println("9 - Write into file");
+            System.out.println("10 - Read from file");
+            System.out.println("------------------------------");
             System.out.println("0 - Exit");
             Scanner scanner = new Scanner(System.in);
             try {
@@ -79,7 +79,7 @@ public class Chief {
 
                 case 2:
                     System.out.println("Name your Salad: ");
-                    salad.setName(scanner.nextLine());
+                    salad.setName(scanner.next());
                     break;
 
                 case 3:
@@ -132,7 +132,7 @@ public class Chief {
                     }
                 case 9:
                     try {
-                        FileOutputStream fos = new FileOutputStream("D:\\GitProj\\Java\\JavaPart2\\ChiefCook\\check.txt");
+                        FileOutputStream fos = new FileOutputStream(file);
                         ObjectOutputStream oos = new ObjectOutputStream(fos);
                         oos.writeObject(salad);
                         break;
@@ -140,6 +140,16 @@ public class Chief {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }
+                case 10:
+                    try{
+                        FileInputStream fin = new FileInputStream(file);
+                        ObjectInputStream ois = new ObjectInputStream(fin);
+                        salad = (Salad) ois.readObject();
+                        break;
+                    }catch (Exception e){
+                        System.out.println("error" + e.getMessage());
+                        break;
                     }
 
 

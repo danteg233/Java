@@ -2,7 +2,6 @@ package com.company;
 
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,33 +13,33 @@ public class Chief {
     public Vegetable getIngredient(Scanner scanner) {
         String ingredientName;
         double weight;
-
+        double calories;
         System.out.println("Enter ingredient name: ");
         ingredientName = scanner.next();
-        System.out.println("Enter weight: ");
-        weight = scanner.nextDouble();
+        try{
+            System.out.println("Enter weight: ");
+            weight = scanner.nextDouble();
+            System.out.println("Enter kcal(per 100 gr): ");
+            calories = scanner.nextDouble();
+        }catch (InputMismatchException e){
+            System.out.println("Wrong input!");
+            scanner.next();
+            return null;
+        }
+
         try{
             ingredientName = "com.company." + ingredientName;
             Class ingredientClass = Class.forName(ingredientName);
-            Class [] paramType = new Class[] {double.class};
-            Constructor constructor = ingredientClass.getDeclaredConstructor(paramType);
-            Vegetable vegetable = (Vegetable) constructor.newInstance(new Object[]{new Double(weight)});
-            System.out.println("DOne");
+            Constructor constructor = ingredientClass.getConstructor(new Class[]{double.class, double.class});
+            vegetable = (Vegetable) constructor.newInstance(calories, weight);
             return vegetable;
 
-        }catch (ClassNotFoundException e) {
+        }catch (Exception e) {
+            System.out.println("Error");
             e.getStackTrace();
             return null;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
         }
-        return null;
+
     }
 
 
@@ -78,9 +77,7 @@ public class Chief {
                 case 3:
                     vegetable = getIngredient(scanner);
                     if (vegetable != null) {
-                        if (!salad.addIngredient(vegetable)) {
-                            System.out.println("Cannot add ingredient!");
-                        }
+                        salad.addIngredient(vegetable);
                     }
                     break;
 

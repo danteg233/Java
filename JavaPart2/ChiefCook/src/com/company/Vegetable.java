@@ -21,6 +21,7 @@ public class Vegetable {
 
     }
 
+
     Vegetable(String name, double calories, double weight){
         if (calories < 0){
             throw new IllegalArgumentException("Can't create vegetable with " + calories + "kcal");

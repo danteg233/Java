@@ -1,11 +1,11 @@
 package com.company;
 
 public class Potato extends Vegetable {
-    Potato(){
+    public Potato(){
         super("Potato", 50);
     }
 
-    Potato(double calories, double weight) {
+    public Potato(double calories, double weight) {
         super("Potato", calories, weight);
     }
 }

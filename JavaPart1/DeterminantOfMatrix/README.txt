@@ -1,0 +1,1 @@
+•	Find a matrix determinant (Найти определитель матрицы)

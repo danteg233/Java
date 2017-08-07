@@ -1,0 +1,1 @@
+•	Sort list or array by string length (Отсортировать список по длине строк)

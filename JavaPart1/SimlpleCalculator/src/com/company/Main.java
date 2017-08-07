@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -22,15 +23,21 @@ public class Main {
 
     public static void main(String[] args) {
         char ans = 'a';
-        try{
+        double a = 0.0;
+        double b = 0.0;
             do {
-                System.out.println("Enter 1-st number: ");
+                try {
+                    System.out.println("Enter 1-st number: ");
+                     a = input.nextDouble();
+                    System.out.println("Enter 2-nd number: ");
+                     b = input.nextDouble();
 
-                double a = input.nextDouble();
+                }catch (InputMismatchException e){
+                    System.out.println("Wrong input.. Try again");
+                }
                 System.out.println("Choose action (+,-,*,/): ");
                 char c = input.next(".").charAt(0);
-                System.out.println("Enter 2-nd number: ");
-                double b = input.nextDouble();
+
                 switch (c){
                     case '+': System.out.println(a + " + " + b + " = " + Add(a, b)); break;
                     case '-': System.out.println(a + " - " + b + " = " + Min(a, b)); break;
@@ -42,8 +49,5 @@ public class Main {
                 Scanner scanner = new Scanner(System.in);
                 ans = scanner.next(".").charAt(0);
             }while(ans!='n');
-        }catch (InputMismatchException e){
-            System.err.println("Invalid input!");
-        }
     }
 }

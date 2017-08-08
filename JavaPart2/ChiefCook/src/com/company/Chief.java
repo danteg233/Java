@@ -9,7 +9,7 @@ import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
-public class Chief implements Serializable {
+public class Chief{
 
     private List<Salad> salads = new ArrayList<>();
     private Vegetable vegetable = null;
@@ -201,27 +201,31 @@ public class Chief implements Serializable {
 
 
                 case 9:
+                    if (salads.isEmpty()){
+                        System.out.println("No salads has been created. Please create it first...\n");
+                        break;
+                    }
                     try(final ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))){
-                        for (Salad salad2 : salads) {
-                            outputStream.writeObject(salad2);
-                        }
+                        outputStream.writeObject(salads);
                     }catch (Exception e) {
                         System.out.println("Error" + e.getMessage());
                         break;
                     }
+                    System.out.println("File has been successfully written...\n");
                     break;
 
 
                 case 10:
-                    ArrayList<Salad> sal;
-                    try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
-                        sal = (ArrayList<Salad>)objectInputStream.readObject();
-                    }catch (ClassCastException e){
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
+                    System.out.println("Are you sure? It will rewrite all information (y/n): ");
+                    char ch = 'a';
+                    ch = scanner.next().charAt(0);
+                    if (ch == 'y'){
+                        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
+                            salads = (ArrayList<Salad>)objectInputStream.readObject();
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
+                        System.out.println("File has been successfully loaded...");
                     }
                     break;
 

@@ -10,9 +10,9 @@ public class Chief {
 
     private Salad salad = new Salad();
     private Vegetable vegetable = null;
-    private String file = "D:\\GitProjects\\Java\\JavaPart2\\ChiefCook\\test.ser";
+    private static final String file = "test.ser";
 
-    public Vegetable getIngredient(Scanner scanner) {               //Creating an ingredient for salad
+    private Vegetable getIngredient(Scanner scanner) {               //Creating an ingredient for salad
         String ingredientName;
         double weight;
         double calories;
@@ -136,10 +136,8 @@ public class Chief {
                         ObjectOutputStream oos = new ObjectOutputStream(fos);
                         oos.writeObject(salad);
                         break;
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        System.out.println("Error" + e.getMessage());
                     }
                 case 10:
                     try{
@@ -148,7 +146,7 @@ public class Chief {
                         salad = (Salad) ois.readObject();
                         break;
                     }catch (Exception e){
-                        System.out.println("error" + e.getMessage());
+                        System.out.println("Error" + e.getMessage());
                         break;
                     }
 

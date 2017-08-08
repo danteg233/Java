@@ -53,4 +53,9 @@ public class Vegetable implements Serializable {
         return name;
     }
 
+    @Override
+    public boolean equals(Object object){
+        return (this.name.equals(((Vegetable)object).getName()));
+    }
+
 }

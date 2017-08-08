@@ -21,6 +21,10 @@ public class Salad implements Serializable{
     }
 
     public void addIngredient(Vegetable vegetable){
+        if (ingredients.contains(vegetable)){
+            System.out.println("This salad already contains this ingredient");
+            return;
+        }
         ingredients.add(vegetable);
     }
 

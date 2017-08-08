@@ -1,23 +1,22 @@
 package com.company;
 
-import sun.invoke.empty.Empty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Salad implements Serializable{
     String name;
     private List<Vegetable> ingredients = new ArrayList<>();
 
-    public Salad(){
-        this.name = "Unknown";
-    }
-
+    public Salad(String name){this.name = name;}
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addIngredient(Vegetable vegetable){
@@ -34,37 +33,31 @@ public class Salad implements Serializable{
             System.out.println("The salad doesn't have any ingredients...");
             return;
         }
-        System.out.println("The salad " + name + " contains:");
+        System.out.println("\nThe salad " + "'" + name + "'" + " contains:");
         System.out.println("-------------------");
         for (Vegetable vegetable:ingredients) {
             System.out.println(vegetable.toString());
         }
         System.out.println("-------------------");
-        System.out.println("Total kcal: " + countCalories());
+        System.out.println("Total weight: " + countWeight() + "\tTotal kcal: " + countCalories());
+        System.out.println();
     }
 
-    private double countCalories() {
+    public double countCalories() {
         double cal = 0.0;
         for (Vegetable vegetable: ingredients) {
             cal += vegetable.getCalories();
         }
         return cal;
     }
-
-    public void sortByWeight()
-    {
-        Collections.sort(ingredients, new WeightComparator());
+    public double countWeight(){
+        double temp = 0.0;
+        for (Vegetable vegetable: ingredients) {
+            temp += vegetable.getWeight();
+        }
+        return temp;
     }
 
-    public void sortByName()
-    {
-        Collections.sort(ingredients, new NameComparator());
-    }
-
-    public void sortByCalories()
-    {
-        Collections.sort(ingredients, new CaloriesComparator());
-    }
 
     public void showByCalories(double lowerCalories, double upperCalories) throws NegativeException {
         if (lowerCalories < 0.0){
@@ -73,26 +66,34 @@ public class Salad implements Serializable{
         if (upperCalories < 0.0){
             throw new NegativeException("Kcal can not be a negative number!", upperCalories);
         }
-        System.out.println("Show ingredients between " + lowerCalories + " and " + upperCalories + " kcal");
+        System.out.println("Show ingredients between " + lowerCalories + " and " + upperCalories + " kcal" + " from " +  "'" + name + "'" + " salad");
         for (Vegetable vegetable: ingredients) {
             double temp = vegetable.getCalories();
             if (temp > lowerCalories && temp < upperCalories){
                 System.out.println(vegetable.getName() + ", " + vegetable.getCalories() + " kcal");
             }
         }
-        System.out.println("-------------------");
+
     }
 
-    public void searchByName(String  searchName) throws SearchByNameException {
-        int count = 0;
+    public boolean searchByName(String  searchName){
+        List<Vegetable> temp = new ArrayList<>();
         for (Vegetable vegetable: ingredients) {
             if (searchName.equals(vegetable.getName())){
-                System.out.println(vegetable.toString());
-                count++;
+                temp.add(vegetable);
             }
         }
-        if (count==0){
-            throw new SearchByNameException(searchName);
+        if (temp.isEmpty()){
+            return false;
         }
+        return true;
+
     }
+
+    @Override
+    public boolean equals(Object object){
+        return (this.name.equals(((Salad)object).getName()));
+    }
+
+
 }

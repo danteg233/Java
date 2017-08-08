@@ -1,0 +1,14 @@
+package com.company.Comparators;
+
+import com.company.Salad;
+
+import java.util.Comparator;
+
+public class WeightComparator implements Comparator<Salad> {
+
+
+    @Override
+    public int compare(Salad s1, Salad s2) {
+        return (int) (s2.countCalories() - s1.countCalories());
+    }
+}

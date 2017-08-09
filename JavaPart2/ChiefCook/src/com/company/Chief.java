@@ -220,6 +220,7 @@ public class Chief{
                     char ch = 'a';
                     ch = scanner.next().charAt(0);
                     if (ch == 'y'){
+                        salads.clear();
                         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
                             salads = (ArrayList<Salad>)objectInputStream.readObject();
                         }catch (Exception e){

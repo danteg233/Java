@@ -1,5 +1,7 @@
-package com.company;
+package com.company.model;
 
+
+import com.company.Exceptions.NegativeException;
 
 import java.io.Serializable;
 import java.util.ArrayList;

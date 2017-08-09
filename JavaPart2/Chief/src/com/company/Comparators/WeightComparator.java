@@ -1,10 +1,11 @@
 package com.company.Comparators;
 
-import com.company.Salad;
+import com.company.model.Salad;
 
 import java.util.Comparator;
 
-public class CaloriesComparator implements Comparator<Salad>{
+public class WeightComparator implements Comparator<Salad> {
+
 
     @Override
     public int compare(Salad s1, Salad s2) {

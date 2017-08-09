@@ -1,4 +1,6 @@
-package com.company;
+package com.company.model;
+
+import com.company.model.Vegetable;
 
 public class Cucumber extends Vegetable {
     public Cucumber(){

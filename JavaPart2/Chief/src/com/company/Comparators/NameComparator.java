@@ -1,6 +1,6 @@
 package com.company.Comparators;
 
-import com.company.Salad;
+import com.company.model.Salad;
 
 import java.util.Comparator;
 

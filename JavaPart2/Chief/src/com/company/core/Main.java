@@ -1,5 +1,7 @@
-package com.company;
+package com.company.core;
 
+
+import com.company.core.Chief;
 
 public class Main {
 

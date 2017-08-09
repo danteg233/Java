@@ -1,2 +1,0 @@
-•	Sort list or array by count of vowels in string (Отсортировать список по количеству гласных в строке)
-•	Sort list or array by string length (Отсортировать список по длине строк)

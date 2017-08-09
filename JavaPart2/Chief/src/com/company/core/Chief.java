@@ -1,9 +1,12 @@
-package com.company;
+package com.company.core;
 
 
 import com.company.Comparators.CaloriesComparator;
 import com.company.Comparators.NameComparator;
 import com.company.Comparators.WeightComparator;
+import com.company.Exceptions.NegativeException;
+import com.company.model.Salad;
+import com.company.model.Vegetable;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -225,6 +228,7 @@ public class Chief{
                             salads = (ArrayList<Salad>)objectInputStream.readObject();
                         }catch (Exception e){
                             System.out.println(e.getMessage());
+                            break;
                         }
                         System.out.println("File has been successfully loaded...");
                     }

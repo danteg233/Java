@@ -36,14 +36,19 @@ public class Util {
                     matrixC.getData()[i][j] += (matrixA.getData()[i][k] * matrixB.getData()[k][j]);
         return matrixC;
     }
-
-    public static double findDeterminant(Matrix matrix, double[][] a){
-        if (matrix.getColumns()==1 && matrix.getRows() == 1) return matrix.getData()[0][0];
-        //2x2 matrix
-        if (matrix.getColumns() == 2 && matrix.getRows() == 2){
-            return (matrix.getData()[0][0] * matrix.getData()[1][1]) - (matrix.getData()[0][1] * matrix.getData()[1][1]);
+    //TURN MATRIX CLOCKWISE BY 90 degree
+    public static Matrix TurnMatrix(Matrix matrix) throws NotEqualException {
+        if (matrix.getColumns() != matrix.getRows()) throw new NotEqualException("Rows and Columns of the matrix should be equal!");
+        Matrix res = new Matrix(matrix.getRows(), matrix.getColumns());
+        int n = matrix.getColumns();
+        for (int i=0; i < n; i++){
+            for (int j=0; j<n; j++){
+                res.getData()[i][j] = matrix.getData()[n-j-1][i];
+            }
         }
-        //matrix NxN
+        return res;
+    }
+
 
 
 

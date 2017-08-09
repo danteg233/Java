@@ -24,7 +24,6 @@ final public class Matrix {
                 this.data[i][j] = data[i][j];
     }
 
-
     public int getColumns() {
         return columns;
     }
@@ -36,4 +35,6 @@ final public class Matrix {
     public double[][] getData() {
         return data;
     }
+
+
 }

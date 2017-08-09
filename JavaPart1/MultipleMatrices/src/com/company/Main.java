@@ -32,15 +32,22 @@ public class Main {
             Matrix m2 = new Matrix(rows_2,columns_2);
             Util.fillMatrix(m1, range_1);
             Util.fillMatrix(m2, range_2);
-            System.out.println("1-st matrix: ");
-            Util.printMatrix(m1);
-            System.out.println("2-nd matrix: ");
-            Util.printMatrix(m2);
-            System.out.println("Product of A*B: ");
             try{
                 Matrix m3 = Util.times(m1, m2);
+                System.out.println("1-st matrix: ");
+                Util.printMatrix(m1);
+                System.out.println("2-nd matrix: ");
+                Util.printMatrix(m2);
+                System.out.println("Product of A*B: ");
                 Util.printMatrix(m3);
+                //------------------------
+                //TURN MATRIX
+                System.out.println("Turn 1-st matrix: \n");
+                Matrix temp = Util.TurnMatrix(m1);
+                Util.printMatrix(temp);
             }catch (MatrixException e){
+                System.out.println(e.getMessage());
+            }catch (NotEqualException e){
                 System.out.println(e.getMessage());
             }
             System.out.println("Continue(y/n): ");

@@ -2,8 +2,11 @@ package com.company;
 
 public class SimpleCalc {
 
-    public static double Add(double a, double b){return a+b;}
-    public static double Sub(double a, double b){return a-b;}
-    public static double Mul(double a, double b) {return a*b;}
-    public static double Dev(double a, double b) throws ArithmeticException {return a/b;}
+    public static float Add(float a, float b){return a+b;}
+    public static float Sub(float a, float b){return a-b;}
+    public static float Mul(float a, float b) {return a*b;}
+    public static float Dev(float a, float b) throws ArithmeticException {
+        if (b==0) throw new ArithmeticException();
+        return a/b;
+    }
 }

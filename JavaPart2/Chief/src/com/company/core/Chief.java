@@ -36,7 +36,7 @@ public class Chief{
         }
 
         try{
-            ingredientName = "com.company." + ingredientName;
+            ingredientName = "com.company.model." + ingredientName;
             Class <?> ingredientClass = Class.forName(ingredientName);
             Constructor <?> constructor = ingredientClass.getConstructor(new Class[]{double.class, double.class});
             vegetable = (Vegetable) constructor.newInstance(calories, weight);

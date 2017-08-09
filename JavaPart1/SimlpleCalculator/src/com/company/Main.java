@@ -11,7 +11,7 @@ public class Main {
     public static double Add(double a, double b){
         return a+b;
     }
-    public static double Min(double a, double b){
+    public static float Min(float a, float b){
         return a-b;
     }
     public static  double Mul(double a, double b){
@@ -23,14 +23,14 @@ public class Main {
 
     public static void main(String[] args) {
         char ans = 'a';
-        double a = 0.0;
-        double b = 0.0;
+        float a = 0;
+        float b = 0;
             do {
                 try {
                     System.out.println("Enter 1-st number: ");
-                     a = input.nextDouble();
+                     a = input.nextFloat();
                     System.out.println("Enter 2-nd number: ");
-                     b = input.nextDouble();
+                     b = input.nextFloat();
 
                 }catch (InputMismatchException e){
                     System.out.println("Wrong input.. Try again");
@@ -39,10 +39,10 @@ public class Main {
                 char c = input.next(".").charAt(0);
 
                 switch (c){
-                    case '+': System.out.println(a + " + " + b + " = " + Add(a, b)); break;
+//                    case '+': System.out.println(a + " + " + b + " = " + Add(a, b)); break;
                     case '-': System.out.println(a + " - " + b + " = " + Min(a, b)); break;
-                    case '*': System.out.println(a + " * " + b + " = " + Mul(a, b)); break;
-                    case '/': System.out.println(a + " / " + b + " = " + Dev(a, b)); break;
+//                    case '*': System.out.println(a + " * " + b + " = " + Mul(a, b)); break;
+//                    case '/': System.out.println(a + " / " + b + " = " + Dev(a, b)); break;
                     default: System.out.println("Wrong sign!!!"); break;
                 }
                 System.out.println("Continue?(y/n)");

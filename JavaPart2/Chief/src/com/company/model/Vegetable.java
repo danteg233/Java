@@ -2,7 +2,7 @@ package com.company.model;
 
 import java.io.Serializable;
 
-public class Vegetable implements Serializable {
+public abstract class Vegetable implements Serializable {
 
     String name;
     double calories;
@@ -24,6 +24,14 @@ public class Vegetable implements Serializable {
     }
 
 
+    public void setCalories(double calories) {
+        this.calories = calories;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
     Vegetable(String name, double calories, double weight){
         if (calories < 0.0){
             throw new IllegalArgumentException("Can't create vegetable with " + calories + "kcal");
@@ -38,7 +46,11 @@ public class Vegetable implements Serializable {
 
     @Override
     public String toString() {
-        return (weight + " gramm of " + name + " : " + calories + " kcal");
+        return (weight + " gramm of " + name + " : " + calories + " kcal (per 100 gr)");
+    }
+    @Override
+    public boolean equals(Object object){
+        return (this.name.equals(((Vegetable)object).getName()));
     }
 
     public double getCalories() {
@@ -53,9 +65,11 @@ public class Vegetable implements Serializable {
         return name;
     }
 
-    @Override
-    public boolean equals(Object object){
-        return (this.name.equals(((Vegetable)object).getName()));
+    public double getTotalCalories(){
+        return calories*weight/100;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

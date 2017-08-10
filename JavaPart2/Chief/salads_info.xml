@@ -1,0 +1,13 @@
+<salad>
+	<salName>Check</salName>
+	<vegetable>
+		<name>Cucumber</name>
+		<weight>300</weight>
+		<calories>57</calories>
+	</vegetable>
+	<vegetable>
+		<name>Tomato</name>
+		<weight>200</weight>
+		<calories>34</calories>
+	</vegetable>
+</salad>

@@ -1,4 +1,4 @@
-package com.company.Exceptions;
+package com.company.exceptions;
 
 //If calories is below 0, then program throw this Exception
 

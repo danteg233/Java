@@ -1,4 +1,4 @@
-package com.company.Comparators;
+package com.company.comparators;
 
 import com.company.model.Salad;
 

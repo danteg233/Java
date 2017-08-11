@@ -22,20 +22,22 @@ public class HashMapVsTreeMap {
                 put(hashMap);
                 put(treeMap);
             }
-            measureTimeToPut(hashMap, "HashMap", 1000);
-            measureTimeToPut(treeMap, "TreeMap", 1000);
+            putCheck(hashMap, "HashMap", 1000);
+            putCheck(treeMap, "TreeMap", 1000);
             System.out.println();
              /*Warm up for get*/
             for (int i = 0; i < 1000; i++) {
                 get(hashMap);
                 get(treeMap);
             }
-            measureTimeToGet(hashMap, "HashMap", 1000);
-            measureTimeToGet(treeMap, "TreeMap", 1000);
+            getCheck(hashMap, "HashMap", 1000);
+            getCheck(treeMap, "TreeMap", 1000);
             System.out.println();
-
-            measureTimeToRemove(hashMap, "HashMap", 1000);
-            measureTimeToRemove(treeMap, "TreeMap", 1000);
+            sizeCheck(hashMap, "HashMap", count);
+            sizeCheck(treeMap, "TreeMap", count);
+            System.out.println();
+            removeCheck(hashMap, "HashMap", 1000);
+            removeCheck(treeMap, "TreeMap", 1000);
 
         }
 
@@ -60,7 +62,8 @@ public class HashMapVsTreeMap {
         }
 
 
-        private static void measureTimeToPut(Map<String, String> map, String setName, int reps) {
+
+        private static void putCheck(Map<String, String> map, String setName, int reps) {
             long start = System.currentTimeMillis();
             for (int i = 0; i < reps; i++) {
                 put(map);
@@ -69,7 +72,7 @@ public class HashMapVsTreeMap {
             System.out.println("Time to put " + (reps * map.size()) + " entries in a " + setName + ": " + (finish - start));
         }
 
-        private static void measureTimeToGet(Map<String, String> map, String setName, int reps) {
+        private static void getCheck(Map<String, String> map, String setName, int reps) {
             long start = System.currentTimeMillis();
             for (int i = 0; i < reps; i++) {
                 get(map);
@@ -78,13 +81,22 @@ public class HashMapVsTreeMap {
             System.out.println("Time to get " + (reps * map.size()) + " entries in a " + setName + ": " + (finish - start));
         }
 
-        private static void measureTimeToRemove(Map<String, String> map, String setName, int reps) {
+        private static void removeCheck(Map<String, String> map, String setName, int reps) {
             long start = System.currentTimeMillis();
             for (int i = 0; i < reps; i++) {
                 remove(map);
             }
             long finish = System.currentTimeMillis();
             System.out.println("Time to remove in a " + setName + ": " + (finish - start));
+        }
+
+        private static void sizeCheck(Map<String, String> map, String setName, int reps) {
+            long start = System.currentTimeMillis();
+            for (int i = 0; i < reps * 1000; i++) {
+                map.size();
+            }
+            long finish = System.currentTimeMillis();
+            System.out.println("Time to get Size in a " + setName + ": " + (finish - start));
         }
 
 }

@@ -30,6 +30,22 @@ public class ArrayListVsLinkedList {
         System.out.println(name + " remove: " + (System.currentTimeMillis() - start));
     }
 
+    private static void containsCheck(List list, String name) {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < count; i++) {
+            list.contains(i);
+        }
+        System.out.println(name + " contains: " + (System.currentTimeMillis() - start));
+    }
+    private static void setCheck(List list, String name) {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < count; i++) {
+            //list.clear();
+            list.set(i, i);
+        }
+        System.out.println(name + " set: " + (System.currentTimeMillis() - start));
+    }
+
     public static void Main() {
         ArrayList arrayList = new ArrayList();
         LinkedList linkedList = new LinkedList();
@@ -39,6 +55,12 @@ public class ArrayListVsLinkedList {
         System.out.println();
         getCheck(arrayList, "ArrayList");
         getCheck(linkedList, "LinkedList");
+        System.out.println();
+        containsCheck(arrayList, "ArrayList");
+        containsCheck(linkedList, "LinkedList");
+        System.out.println();
+        setCheck(arrayList, "ArrayList");
+        setCheck(linkedList, "LinkedList");
         System.out.println();
         removeCheck(arrayList, "ArrayList");
         removeCheck(linkedList, "LinkedList");

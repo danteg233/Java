@@ -32,7 +32,7 @@ public abstract class Vegetable implements Serializable {
         this.weight = weight;
     }
 
-    Vegetable(String name, double calories, double weight){
+    Vegetable(String name, double calories, double weight) throws IllegalArgumentException{
         if (calories < 0.0){
             throw new IllegalArgumentException("Can't create vegetable with " + calories + "kcal");
         }

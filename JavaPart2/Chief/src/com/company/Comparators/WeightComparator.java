@@ -9,6 +9,6 @@ public class WeightComparator implements Comparator<Salad> {
 
     @Override
     public int compare(Salad s1, Salad s2) {
-        return (int) (s1.countCalories() - s2.countCalories());
+        return (int) (s1.countWeight() - s2.countWeight());
     }
 }

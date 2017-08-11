@@ -12,6 +12,7 @@ import com.company.model.Vegetable;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.*;
 
@@ -21,8 +22,6 @@ public class Chief{
     private static String username = "root";
     private static String password = "test";
     private static String saladXml = "salads_info.xml";
-
-
     private static Connection connection;
 
     private List<Salad> salads = new ArrayList<>();
@@ -54,11 +53,11 @@ public class Chief{
             return vegetable;                                                       //If ingredient exist then we return it,
                                                                                     //otherwise null
 
-        }catch (Exception e) {
-            System.out.println("Couldn't find a class with name  " + ingredientName);
-            return null;
         }catch (NoClassDefFoundError e){
             System.out.println("[NoClassDefFoundError] " + e.getMessage());
+            return null;
+        } catch (Exception e){
+            System.err.println(e.getMessage());
             return null;
         }
 
@@ -66,7 +65,7 @@ public class Chief{
 
     private int getIndexByName(String name){
         for (Salad salad: salads) {
-            if (salad.getName().equals(name)){
+            if (salad.getName().equalsIgnoreCase(name)){
                 return salads.indexOf(salad);
             }
         }
@@ -115,8 +114,24 @@ public class Chief{
 
                 case 2:
                     System.out.println("Name your Salad: ");
-                    Salad salad = new Salad(scanner.next());
+                    String name = scanner.next();
+                    Salad salad = new Salad(name);
+                    if (salads.contains(salad)){
+                        System.out.println("Your salads already contains salad with thiis name. Do you want to rewrite it? (enter y for confirm): ");
+                        char c = 'a';
+                        c = scanner.next().charAt(0);
+                        if (c == 'y'){
+                            salads.remove(salad);
+                            salads.add(salad);
+                            break;
+                        }
+                        System.err.println("Couldn't replace salad..");
+                        break;
+                    }
+                    System.out.println("New salad has been successfully added..");
                     salads.add(salad);
+                    System.out.println();
+
                     break;
 
                 case 3:
@@ -140,9 +155,9 @@ public class Chief{
 
                 case 4:
                     System.out.println("Enter name of salad: ");
-                    String name = scanner.next();
+                    String string = scanner.next();
                     try {
-                        int indexByName = getIndexByName(name);
+                        int indexByName = getIndexByName(string);
                         if (indexByName != -1){
                             vegetable = getIngredient(scanner);
                             if (vegetable != null){
@@ -151,7 +166,7 @@ public class Chief{
                             }
                             break;
                         }
-                        System.out.println("Couldn't find salad with name: " + "'" + name + "'");
+                        System.out.println("Couldn't find salad with name: " + "'" + string + "'");
                         break;
 
                     }catch (Exception e){
@@ -240,12 +255,14 @@ public class Chief{
                         salads.clear();
                         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))){
                             salads = (ArrayList<Salad>)objectInputStream.readObject();
+                            System.out.println("File has been successfully loaded...");
+                            break;
                         }catch (Exception e){
                             System.out.println(e.getMessage());
                             break;
                         }
-                        System.out.println("File has been successfully loaded...");
                     }
+                    System.err.println("Press Y to confirm!!");
                     break;
 
                 case 11:
@@ -294,9 +311,21 @@ public class Chief{
                     }
                     XMLReader xmlReader = new XMLReader(saladXml);
                     salad = xmlReader.readInfo(nameOfSalad);
-                    if (salad!=null){
-                        salads.add(salad);
+                    if (salad == null){
+                        System.err.println("Couldn't find any salads in XML file with name " + nameOfSalad);
+                        break;
                     }
+                    if (salads.contains(salad)) {
+                        System.out.println("This salad already exist. Do you want to rewrite it? (print n for NO)");
+                        char ans = scanner.next().charAt(0);
+                        if (ans == 'n') {
+                            System.out.println("Exiting...");
+                            break;
+                        }
+                        System.out.println("The salad has been replaced...");
+                        salads.remove(salad);
+                    }
+                    salads.add(salad);
                     break;
 
 

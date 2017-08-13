@@ -1,7 +1,7 @@
 package com.company.model;
 
 
-import com.company.Exceptions.NegativeException;
+import com.company.exceptions.NegativeException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +11,10 @@ public class Salad implements Serializable{
     String name;
     private List<Vegetable> ingredients = new ArrayList<>();
 
+    public Salad(){
+        this.name = "Unknown";
+    }
+
     public Salad(String name){this.name = name;}
 
     public void setName(String name) {
@@ -19,6 +23,10 @@ public class Salad implements Serializable{
 
     public String getName() {
         return name;
+    }
+
+    public boolean isEmpty(){
+        return ingredients.isEmpty();
     }
 
     public void addIngredient(Vegetable vegetable){
@@ -48,7 +56,7 @@ public class Salad implements Serializable{
     public double countCalories() {
         double cal = 0.0;
         for (Vegetable vegetable: ingredients) {
-            cal += vegetable.getCalories();
+            cal += vegetable.getTotalCalories();
         }
         return cal;
     }
@@ -78,23 +86,23 @@ public class Salad implements Serializable{
 
     }
 
-    public boolean searchByName(String  searchName){
-        List<Vegetable> temp = new ArrayList<>();
-        for (Vegetable vegetable: ingredients) {
-            if (searchName.equals(vegetable.getName())){
-                temp.add(vegetable);
-            }
-        }
-        if (temp.isEmpty()){
-            return false;
-        }
-        return true;
-
-    }
+//    public boolean searchByName(String  searchName){
+//        List<Vegetable> temp = new ArrayList<>();
+//        for (Vegetable vegetable: ingredients) {
+//            if (searchName.equals(vegetable.getName())){
+//                temp.add(vegetable);
+//            }
+//        }
+//        if (temp.isEmpty()){
+//            return false;
+//        }
+//        return true;
+//
+//    }
 
     @Override
     public boolean equals(Object object){
-        return (this.name.equals(((Salad)object).getName()));
+        return (this.name.equalsIgnoreCase(((Salad)object).getName()));
     }
 
 

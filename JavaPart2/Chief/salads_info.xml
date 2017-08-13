@@ -1,0 +1,29 @@
+<salads>
+	<salad>
+	<salName>Check</salName>
+	<vegetable>
+		<name>Cucumber</name>
+		<weight>300</weight>
+		<calories>57</calories>
+	</vegetable>
+	<vegetable>
+		<name>Tomato</name>
+		<weight>200</weight>
+		<calories>34</calories>
+	</vegetable>
+	</salad>
+	<salad>
+	<salName>New</salName>
+	<vegetable>
+		<name>Cucumber</name>
+		<weight>100</weight>
+		<calories>57</calories>
+	</vegetable>
+	<vegetable>
+		<name>Potato</name>
+		<weight>200</weight>
+		<calories>78</calories>
+	</vegetable>
+	</salad>
+</salads>
+

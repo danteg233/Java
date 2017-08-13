@@ -10,6 +10,6 @@ public class Tomato extends Vegetable {
 
 
     public Tomato(double weight, double calories){
-        super("Tomato", calories, weight);
+        super("Tomato", weight, calories);
     }
 }
